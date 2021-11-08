@@ -1,5 +1,7 @@
 import { NextPage } from 'next';
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
+import { Fragment } from 'react';
 
 import AllPosts from '../../components/posts/all-posts';
 import { getAllPosts } from '../../utils/posts-util';
@@ -10,7 +12,18 @@ type AllPostsPageProps = {
 };
 
 const AllPostsPage: NextPage<AllPostsPageProps> = ({ posts }) => {
-  return <AllPosts posts={posts} />;
+  return (
+    <Fragment>
+      <Head>
+        <title>All Posts</title>
+        <meta
+          name='description'
+          content='A list of all programming-related tutorials and posts!'
+        />
+      </Head>
+      <AllPosts posts={posts} />
+    </Fragment>
+  );
 };
 
 export const getStaticProps: GetStaticProps = () => {

@@ -1,9 +1,9 @@
 import classes from './all-posts.module.css';
 import PostsGrid from './posts-grid';
-import { Post } from '../../types/post-type/post';
+import { PostData } from '../../types/post-type/post';
 
 type AllPostsProps = {
-  posts: Post[];
+  posts: PostData[];
 };
 
 const AllPosts: React.FC<AllPostsProps> = ({ posts }) => {

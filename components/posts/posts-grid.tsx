@@ -1,9 +1,9 @@
 import PostItem from './post-item';
 import classes from './posts-grid.module.css';
-import { Post } from '../../types/post-type/post';
+import { PostData } from '../../types/post-type/post';
 
 type PostsGridProps = {
-  posts: Post[];
+  posts: PostData[];
 };
 
 const PostsGrid: React.FC<PostsGridProps> = ({ posts }) => {

@@ -2,10 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import classes from './post-item.module.css';
-import { Post } from '../../types/post-type/post';
+import { PostData } from '../../types/post-type/post';
 
 type PostItemProps = {
-  post: Post;
+  post: PostData;
   key: string;
 };
 
@@ -20,8 +20,6 @@ const PostItem: React.FC<PostItemProps> = ({ post }) => {
 
   const imagePath = `/images/posts/${slug}/${image}`;
   const linkPath = `/posts/${slug}`;
-
-  console.log(imagePath);
 
   return (
     <li className={classes.post}>
