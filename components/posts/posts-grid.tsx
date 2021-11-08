@@ -1,16 +1,16 @@
 import PostItem from './post-item';
-import classes from './post-grid.module.css';
+import classes from './posts-grid.module.css';
+import { Post } from '../../types/post-type/post';
 
-interface Post {
-  title: string;
-  description: string;
-}
+type PostsGridProps = {
+  posts: Post[];
+};
 
-const PostsGrid: React.FC<{ posts: Post[] }> = ({ posts }) => {
+const PostsGrid: React.FC<PostsGridProps> = ({ posts }) => {
   return (
     <ul className={classes.grid}>
       {posts.map((post) => (
-        <PostItem />
+        <PostItem key={post.slug} post={post} />
       ))}
     </ul>
   );
