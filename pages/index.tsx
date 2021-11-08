@@ -1,17 +1,33 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { Fragment } from 'react';
 
 import Hero from '../components/home-page/hero';
 import FeaturedPosts from '../components/home-page/featured-posts';
-import { DUMMY_POSTS } from '../dummy-data';
+import { getFeaturedPosts } from '../utils/posts-util';
+import { PostData } from '../types/post-type/post';
 
-const HomePage: NextPage = () => {
+type HomePageProps = {
+  posts: PostData[];
+};
+
+const HomePage: NextPage<HomePageProps> = ({ posts }) => {
   return (
     <Fragment>
       <Hero />
-      <FeaturedPosts posts={DUMMY_POSTS} />
+      <FeaturedPosts posts={posts} />
     </Fragment>
   );
+};
+
+export const getStaticProps: GetStaticProps = () => {
+  const featuredPosts = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: featuredPosts,
+    },
+    revalidate: 60,
+  };
 };
 
 export default HomePage;
