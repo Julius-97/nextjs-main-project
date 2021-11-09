@@ -34,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<outData>) => {
     let client: MongoClient;
 
     const connectionString = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTERNAME}.wee0h.mongodb.net/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`;
-    console.log(connectionString);
+
     try {
       client = await MongoClient.connect(connectionString);
     } catch (error) {
