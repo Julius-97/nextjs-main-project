@@ -65,6 +65,24 @@
   border-color: var(--color-primary-500);
 }
 
+.slide_in_up_enter {
+  transform: translateY(0);
+}
+
+.slide-in_up_enter_active {
+  transform: translateY(100%);
+  transition: all 600ms;
+}
+
+.slide_in_up_exit {
+  transform: translateY(0%);
+}
+
+.slide_in_up_exit_active {
+  transform: translateY(100%);
+  transition: all 600ms;
+}
+
 @media (min-width: 768px) {
   .contact h1 {
     font-size: var(--size-16);

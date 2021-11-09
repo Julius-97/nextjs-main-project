@@ -5,7 +5,7 @@ import classes from './notification.module.css';
 type NotificationProps = {
   title: string;
   message: string;
-  status: 'success' | 'error' | 'pending';
+  status: 'success' | 'error' | 'pending' | 'waiting';
 };
 
 const Notification: React.FC<NotificationProps> = (props) => {

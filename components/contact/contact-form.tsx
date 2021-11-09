@@ -1,4 +1,5 @@
 import { FormEventHandler, useEffect, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import Notification from '../ui/notification';
 import classes from './contact-form.module.css';
@@ -28,16 +29,16 @@ const ContactForm: React.FC = ({}) => {
   const [enteredName, setEnteredName] = useState<string>('');
   const [enteredMessage, setEnteredMessage] = useState<string>('');
   const [requestStatus, setRequestStatus] = useState<
-    'pending' | 'success' | 'error' | null
-  >();
+    'pending' | 'success' | 'error' | 'waiting'
+  >('waiting');
   const [requestError, setRequestError] = useState<string | null>();
 
   useEffect(() => {
     if (requestStatus === 'success' || requestStatus === 'error') {
       const timer = setTimeout(() => {
-        setRequestStatus(null);
+        setRequestStatus('waiting');
         setRequestError(null);
-      }, 3000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [requestStatus]);
@@ -65,10 +66,14 @@ const ContactForm: React.FC = ({}) => {
   };
 
   let notification: {
-    status: 'pending' | 'success' | 'error';
+    status: 'pending' | 'success' | 'error' | 'waiting';
     title: string;
     message: string;
-  } | null = null;
+  } = {
+    status: requestStatus,
+    title: '',
+    message: '',
+  };
 
   if (requestStatus === 'pending') {
     notification = {
@@ -134,13 +139,31 @@ const ContactForm: React.FC = ({}) => {
           <button>Send Message</button>
         </div>
       </form>
-      {notification && (
+      <CSSTransition
+        in={notification.status != 'waiting'}
+        timeout={2000}
+        mountOnEnter
+        unmountOnExit
+        classNames={{
+          enter: classes.slide_in_up_enter,
+          enterActive: classes.slide_in_up_enter_active,
+          exit: classes.slide_in_up_exit,
+          exitActive: classes.slide_in_up_exit_active,
+        }}
+      >
         <Notification
           status={notification.status}
           title={notification.title}
           message={notification.message}
         />
-      )}
+      </CSSTransition>
+      {/*notification && (
+        <Notification
+          status={notification.status}
+          title={notification.title}
+          message={notification.message}
+        />
+      )*/}
     </section>
   );
 };

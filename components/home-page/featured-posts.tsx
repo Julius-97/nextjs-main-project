@@ -1,8 +1,9 @@
 import PostsGrid from '../posts/posts-grid';
 import classes from './featured-posts.module.css';
-import { Post } from '../../types/post-type/post';
+import { PostData } from '../../types/post-type/post';
+
 type FeaturedPostsProps = {
-  posts: Post[];
+  posts: PostData[];
 };
 
 const FeaturedPosts: React.FC<FeaturedPostsProps> = ({ posts }) => {
