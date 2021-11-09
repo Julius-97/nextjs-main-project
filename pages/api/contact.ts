@@ -38,7 +38,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<outData>) => {
     try {
       client = await MongoClient.connect(connectionString);
     } catch (error) {
-      res.status(500).json({ message: 'Could not connect to database' });
+      res.status(500).json({ message: (error as { message: string }).message });
       return;
     }
 
